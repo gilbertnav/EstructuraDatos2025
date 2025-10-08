@@ -6,36 +6,12 @@ import javax.swing.JOptionPane;
 public class OpAlumno {
 
     private static Alumno alumno;
-    private String matricula;
-    private String nombre;
-    private String apPaterno;
-    private String apMaterno;
-    private String carrera;
+    private static String matricula;
+    private static String nombre;
+    private static String apPaterno;
+    private static String apMaterno;
+    private static String carrera;
     public static ArrayList<Alumno> listaAlumnos = new ArrayList<>();
-
-    public static void cargarDatos() {
-        alumno = new Alumno();
-        String nombre = "\"1\",\"24060008\",\"ABARCA,VAZQUEZ,YULIANA\",\"Elija una OpciónSNJR\",\"INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES\"";
-        String[] datosAlumno = nombre.split(",");
-        alumno.setMatricula(datosAlumno[1]);
-        alumno.setNombre(datosAlumno[4]);
-        alumno.setApPaterno(datosAlumno[2]);
-        alumno.setApMaterno(datosAlumno[3]);
-        alumno.setCarrera(datosAlumno[6]);
-        //Agregando el objeto a la lista
-        listaAlumnos.add(alumno);
-        
-        nombre = "\"2\",\"24060001\",\"ALVARADO,BUSTOS,EDSON ALEXANDER\",\"Elija una OpciónSNJR\",\"INGENIERÍA EN TECNOLOGÍAS DE LA INFORMACIÓN Y COMUNICACIONES\"";
-        datosAlumno = nombre.split(",");
-        alumno = new Alumno();
-        alumno.setMatricula(datosAlumno[1]);
-        alumno.setNombre(datosAlumno[4]);
-        alumno.setApPaterno(datosAlumno[2]);
-        alumno.setApMaterno(datosAlumno[3]);
-        alumno.setCarrera(datosAlumno[6]);
-        //Agregando el objeto a la lista
-        listaAlumnos.add(alumno);
-    }
 
     public static void consultarAlumnos() {
         StringBuilder mensaje = new StringBuilder();
@@ -47,5 +23,55 @@ public class OpAlumno {
             mensaje.append(alum.getCarrera()).append("\n");
         }
         JOptionPane.showMessageDialog(null, mensaje);
+    }
+    
+    private static int buscarAlumno(String matricula){
+        int posEnc = -1;
+        int indice=0;
+        for (Alumno alum : listaAlumnos) {
+            if (alum.getMatricula().equals(matricula)){
+                posEnc = indice;
+            }
+            indice++;
+        }
+        return posEnc;
+    }
+    
+    public static void consultaIndividual(){
+        String matricula;
+        matricula = JOptionPane.showInputDialog("Matricula a buscar");
+        int pos = buscarAlumno(matricula);
+        if (pos != -1) {
+            StringBuilder mensaje = new StringBuilder();
+            mensaje.append(listaAlumnos.get(pos).getMatricula() +"\n");
+            mensaje.append(listaAlumnos.get(pos).getNombre()+"\n");
+            JOptionPane.showMessageDialog(null, mensaje);
+        }else{
+            JOptionPane.showMessageDialog(null, "Matricula no encontrada");
+        }
+    }
+    
+    public static void agregarAlumno(){
+        matricula = JOptionPane.showInputDialog("Matricula:");
+        int pos = buscarAlumno(matricula);
+        if (pos == -1) {
+            alumno = new Alumno();
+            nombre = JOptionPane.showInputDialog("Nombre:");
+            apPaterno = JOptionPane.showInputDialog("Apellido paterno:");
+            apMaterno = JOptionPane.showInputDialog("Apellido materno:");
+            carrera = JOptionPane.showInputDialog("Carrera");
+            //Guardamos dentro del objeto
+            alumno.setMatricula(matricula);
+            alumno.setNombre(nombre);
+            alumno.setApPaterno(apPaterno);
+            alumno.setApMaterno(apMaterno);
+            alumno.setCarrera(carrera);
+            //Agregamos el alumno a la lista
+            listaAlumnos.add(alumno);
+            //Guardar objeto dentro del archivo alumnos_SIGEA
+        }else{
+            JOptionPane.showMessageDialog(null, "La matricula ya está registrada");
+        }
+        
     }
 }

@@ -23,9 +23,10 @@ public class OpArchivo {
         String[] detalleDatos;
         StringBuilder datosLimpios = new StringBuilder();
         while(brAlumno.ready()){
-            alumno = new Alumno();
+           
             if (!esPrimeraLinea) {
-                datosLimpios.setLength(0);
+                 alumno = new Alumno();
+                 datosLimpios.setLength(0);
                 //Leemos los datos del archivo y lo limpiamos
                 datosLimpios.append(brAlumno.readLine().replaceAll("\"", ""));
                 //Separamos los datos limpios para procesarlos

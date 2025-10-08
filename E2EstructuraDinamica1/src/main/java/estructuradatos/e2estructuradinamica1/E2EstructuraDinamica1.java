@@ -8,6 +8,7 @@ public class E2EstructuraDinamica1 {
 
     public static void main(String[] args) throws IOException {
         OpArchivo.cargarDatos();
+        OpAlumno.agregarAlumno();
         OpAlumno.consultarAlumnos();
         
     }
