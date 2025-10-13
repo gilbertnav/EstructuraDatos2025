@@ -89,13 +89,13 @@ public class OpPaciente {
         }
         return posEnc;
     }
- /*   
+   
     private int buscarPacienteEliminado(int expediente) {
         //Posición donde encuentre el expediente en el arreglo
         int posEnc = -1;
         for (int i = 0; i <= pos; i++) {
-            if (listaPacientes[i].getExpediente() == expediente &&
-                listaPacientes[i].isEliminado()    ) {
+            if (listaPacientes.get(i).getExpediente() == expediente &&
+                listaPacientes.get(i).isEliminado()) {
                 posEnc = i;
             }
         }
@@ -108,14 +108,14 @@ public class OpPaciente {
         posEnc = buscarPaciente(expediente);
         if (posEnc != -1) {
             StringBuilder mensaje = new StringBuilder();
-            mensaje.append("No de Expediente: ").append(listaPacientes[posEnc].getExpediente()).append("\n");
-            mensaje.append("N o m b r e     : ").append(listaPacientes[posEnc].getNombre()).append("\n");
-            mensaje.append("Apellido Paterno: ").append(listaPacientes[posEnc].getApPaterno()).append("\n");
-            mensaje.append("Apellido Materno: ").append(listaPacientes[posEnc].getApMaterno()).append("\n");
-            mensaje.append("E  d  a  d      : ").append(listaPacientes[posEnc].getEdad()).append("\n");
-            mensaje.append("E s t a t u r a : ").append(listaPacientes[posEnc].getEstatura()).append("\n");
-            mensaje.append("P  e  s  o      : ").append(listaPacientes[posEnc].getPeso()).append("\n");
-            mensaje.append("S  e  x  o      : ").append(listaPacientes[posEnc].getSexo()).append("\n");
+            mensaje.append("No de Expediente: ").append(listaPacientes.get(posEnc).getExpediente()).append("\n");
+            mensaje.append("N o m b r e     : ").append(listaPacientes.get(posEnc).getNombre()).append("\n");
+            mensaje.append("Apellido Paterno: ").append(listaPacientes.get(posEnc).getApPaterno()).append("\n");
+            mensaje.append("Apellido Materno: ").append(listaPacientes.get(posEnc).getApMaterno()).append("\n");
+            mensaje.append("E  d  a  d      : ").append(listaPacientes.get(posEnc).getEdad()).append("\n");
+            mensaje.append("E s t a t u r a : ").append(listaPacientes.get(posEnc).getEstatura()).append("\n");
+            mensaje.append("P  e  s  o      : ").append(listaPacientes.get(posEnc).getPeso()).append("\n");
+            mensaje.append("S  e  x  o      : ").append(listaPacientes.get(posEnc).getSexo()).append("\n");
             JOptionPane.showMessageDialog(null, mensaje);
         } else {
             JOptionPane.showMessageDialog(null, "El expediente no existe");
@@ -131,29 +131,29 @@ public class OpPaciente {
             int opc;
             do {
                 menu.delete(0, menu.capacity());
-                menu.append("Exp. Num. ").append(listaPacientes[posEnc].getExpediente() + "\n");
-                menu.append("[1] Nombre: ").append(listaPacientes[posEnc].getNombre() + "\n");
-                menu.append("[2] Ap Paterno: ").append(listaPacientes[posEnc].getApPaterno() + "\n");
-                menu.append("[3] Ap Materno: ").append(listaPacientes[posEnc].getApMaterno() + "\n");
-                menu.append("[4] Edad: ").append(listaPacientes[posEnc].getEdad() + "\n");
-                menu.append("[5] Estatura: ").append(listaPacientes[posEnc].getEstatura() + "\n");
-                menu.append("[6] Sexo: ").append(listaPacientes[posEnc].getSexo() + "\n");
-                menu.append("[7] Peso: ").append(listaPacientes[posEnc].getPeso() + "\n");
+                menu.append("Exp. Num. ").append(listaPacientes.get(posEnc).getExpediente() + "\n");
+                menu.append("[1] Nombre: ").append(listaPacientes.get(posEnc).getNombre() + "\n");
+                menu.append("[2] Ap Paterno: ").append(listaPacientes.get(posEnc).getApPaterno() + "\n");
+                menu.append("[3] Ap Materno: ").append(listaPacientes.get(posEnc).getApMaterno() + "\n");
+                menu.append("[4] Edad: ").append(listaPacientes.get(posEnc).getEdad() + "\n");
+                menu.append("[5] Estatura: ").append(listaPacientes.get(posEnc).getEstatura() + "\n");
+                menu.append("[6] Sexo: ").append(listaPacientes.get(posEnc).getSexo() + "\n");
+                menu.append("[7] Peso: ").append(listaPacientes.get(posEnc).getPeso() + "\n");
                 menu.append("[8] Salir \n\n ");
                 menu.append("Elige una opción ");
                 opc = Integer.parseInt(JOptionPane.showInputDialog(menu));
                 switch (opc) {
                     case 1:
                         nombre = JOptionPane.showInputDialog("Nombre");
-                        listaPacientes[posEnc].setNombre(nombre);
+                        listaPacientes.get(posEnc).setNombre(nombre);
                         break;
                     case 2:
                         apPaterno = JOptionPane.showInputDialog("Apellido paterno");
-                        listaPacientes[posEnc].setApPaterno(apPaterno);
+                        listaPacientes.get(posEnc).setApPaterno(apPaterno);
                         break;
                     case 3:
                         apMaterno = JOptionPane.showInputDialog("Apellido materno");
-                        listaPacientes[posEnc].setApMaterno(apMaterno);
+                        listaPacientes.get(posEnc).setApMaterno(apMaterno);
                         break;
                 }
             } while (opc != 8);
@@ -168,7 +168,7 @@ public class OpPaciente {
         int posEnc;
         posEnc = buscarPaciente(expediente);
         if (posEnc != -1) {
-            listaPacientes[posEnc].setEliminado(true);
+            listaPacientes.get(posEnc).setEliminado(true);
             JOptionPane.showMessageDialog(null, "Expediente eliminado");
         }else{
             JOptionPane.showMessageDialog(null, "Expediente no encontrado");
@@ -242,5 +242,4 @@ public class OpPaciente {
         //registros que no estén eliminados.
         pos =noEliminados -1;
     }
-*/
 }

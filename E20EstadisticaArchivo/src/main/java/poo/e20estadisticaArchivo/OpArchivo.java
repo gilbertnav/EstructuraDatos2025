@@ -52,8 +52,8 @@ public class OpArchivo {
             paciente.setSexo(brPaciente.readLine().charAt(0));
             paciente.setEliminado(Boolean.parseBoolean(brPaciente.readLine()));
             //Incrementamos el valor de pos
-            OpPaciente.pos++;
-            OpPaciente.arregloPacientes[OpPaciente.pos]=paciente;
+//            OpPaciente.pos++;
+            OpPaciente.listaPacientes.add(paciente);
         }
         frPaciente.close();
         brPaciente.close();
@@ -64,18 +64,18 @@ public class OpArchivo {
         archivo.createNewFile();
         FileWriter fwExpediente = new FileWriter(pathPacientes, true);
         PrintWriter pwExpediente = new PrintWriter(fwExpediente);
-        for (int i = 0; i <=OpPaciente.pos; i++) {
-           //Guardando los datos en el archivo
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getExpediente());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getNombre());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getApPaterno());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getApMaterno());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getEdad());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getEstatura());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getPeso());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].getSexo());
-            pwExpediente.println(OpPaciente.arregloPacientes[i].isEliminado());
+        for (Paciente p : OpPaciente.listaPacientes) {
+            pwExpediente.println(p.getExpediente());
+            pwExpediente.println(p.getNombre());
+            pwExpediente.println(p.getApPaterno());
+            pwExpediente.println(p.getApMaterno());
+            pwExpediente.println(p.getEdad());
+            pwExpediente.println(p.getEstatura());
+            pwExpediente.println(p.getPeso());
+            pwExpediente.println(p.getSexo());
+            pwExpediente.println(p.isEliminado());
         }
+        
         pwExpediente.close();
         fwExpediente.close();
            
