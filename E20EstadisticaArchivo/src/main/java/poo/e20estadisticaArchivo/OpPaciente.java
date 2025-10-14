@@ -180,11 +180,11 @@ public class OpPaciente {
         StringBuilder mensaje = new StringBuilder();
         mensaje.append("Exp.   N O M B R E\n");
         for (int i = 0; i <= pos; i++) {
-            if (listaPacientes[i].isEliminado()) {
-                mensaje.append(listaPacientes[i].getExpediente() + "-------");
-                mensaje.append(listaPacientes[i].getNombre() + " ");
-                mensaje.append(listaPacientes[i].getApPaterno()+ " ");
-                mensaje.append(listaPacientes[i].getApMaterno()+ "\n");
+            if (listaPacientes.get(i).isEliminado()) {
+                mensaje.append(listaPacientes.get(i).getExpediente() + "-------");
+                mensaje.append(listaPacientes.get(i).getNombre() + " ");
+                mensaje.append(listaPacientes.get(i).getApPaterno()+ " ");
+                mensaje.append(listaPacientes.get(i).getApMaterno()+ "\n");
             }
         }
         mensaje.append("\nExpediente a restaurar...");
@@ -192,7 +192,7 @@ public class OpPaciente {
         int posEnc;
         posEnc = buscarPacienteEliminado(expediente);
         if (posEnc != -1) {
-            listaPacientes[posEnc].setEliminado(false);
+            listaPacientes.get(posEnc).setEliminado(false);
             JOptionPane.showMessageDialog(null, "Expediente restaurado");
         }else{
             JOptionPane.showMessageDialog(null, "Expediente no encontrado");
@@ -204,17 +204,7 @@ public class OpPaciente {
         int posEnc;
         posEnc = buscarPaciente(expediente);
         if (posEnc != -1) {
-            //Si el expedientes es el último registrado en el  arreglo
-            if (posEnc == pos) {
-                listaPacientes[posEnc] = null;
-                pos--;
-            }else{
-                for (int i = posEnc+1; i <=pos; i++) {
-                    listaPacientes[i-1]=listaPacientes[i];
-                }
-                listaPacientes[pos] = null;
-                pos--;
-            }
+                listaPacientes.remove(posEnc);
             JOptionPane.showMessageDialog(null, "Expediente eliminado");
         }else{
             JOptionPane.showMessageDialog(null, "Expediente no encontrado");
@@ -222,24 +212,14 @@ public class OpPaciente {
     }
     //Elimina los expedientes con baja temporal
     public void limpiarExpedientes(){
-        int noEliminados=0;
-        //Cuenta cuantos registros no están eliminados
-        for (int i = 0; i <=pos; i++) {
-            if (!listaPacientes[i].isEliminado()) 
-                noEliminados++;
+        int eliminados=0;
+        //Borra y cuenta cuantos lod registros eliminados
+        for (int i = 0; i <listaPacientes.size(); i++) {
+            if (listaPacientes.get(i).isEliminado()){
+                eliminados++;
+                listaPacientes.remove(i); //Se elimina el paciente
+            } 
         }
-        //Creamos arregloAux para los registros que no esté eliminados
-        Paciente[] arregloAux = new Paciente[noEliminados];
-        int indice=0;
-        for (int i = 0; i <=pos; i++) {
-            //Si el registro no está eliminado lo guardamos arregloAux
-            if (!listaPacientes[i].isEliminado()) 
-               arregloAux[indice++] = listaPacientes[i];
-        }
-        //Copiamos el arregloAux al arreglo original
-        listaPacientes = arregloAux;
-        //modificamos el valor de pos de acuerdo el numero de
-        //registros que no estén eliminados.
-        pos =noEliminados -1;
+        JOptionPane.showMessageDialog(null, "Se eliminaron " + eliminados + " registros");
     }
 }
