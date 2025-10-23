@@ -15,7 +15,7 @@ public class OpPaciente {
     //Para poder accederlo desde cualquier clase
     //se comporta como una variable global del sistema
     //Creacion de objetos de interfaz
-    public static List<Paciente> listaPacientes = new ArrayList<Paciente>();
+    public static List<Paciente> listaPacientes = new LinkedList<Paciente>();
     //public static ArrayList<Paciente> listaPacientes = new ArrayList<>();
     //public static LinkedList<Paciente> listaPacientes = new LinkedList<>();
     private int expediente;
