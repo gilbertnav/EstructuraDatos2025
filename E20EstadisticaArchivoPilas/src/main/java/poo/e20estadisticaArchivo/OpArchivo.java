@@ -51,8 +51,7 @@ public class OpArchivo {
             paciente.setPeso(Float.parseFloat(brPaciente.readLine()));
             paciente.setSexo(brPaciente.readLine().charAt(0));
             paciente.setEliminado(Boolean.parseBoolean(brPaciente.readLine()));
-            //Incrementamos el valor de pos
-//            OpPaciente.pos++;
+            //Se cargan los datos a la pila
             OpPaciente.pilaPacientes.push(paciente);
         }
         frPaciente.close();
