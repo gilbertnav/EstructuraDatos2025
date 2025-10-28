@@ -7,9 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 public class OpArchivo {
     private static String pathPacientes = "c:\\sistema\\paciente.txt";
@@ -40,6 +43,7 @@ public class OpArchivo {
         BufferedReader brPaciente = new BufferedReader(frPaciente);
         Paciente paciente;
         //Mientras existan datos a leer en el archivo
+        Stack<Paciente> pilaAux = new Stack<>();
         while(brPaciente.ready()){
             paciente = new Paciente();
             paciente.setExpediente(Integer.parseInt(brPaciente.readLine()));
@@ -51,8 +55,12 @@ public class OpArchivo {
             paciente.setPeso(Float.parseFloat(brPaciente.readLine()));
             paciente.setSexo(brPaciente.readLine().charAt(0));
             paciente.setEliminado(Boolean.parseBoolean(brPaciente.readLine()));
-            //Se cargan los datos a la pila
-            OpPaciente.pilaPacientes.push(paciente);
+            //Se cargan los datos a la pilaAux
+            pilaAux.push(paciente);
+        }
+        //Agregamos los daos a la pilaPacientes
+        while(!pilaAux.empty()){
+            OpPaciente.pilaPacientes.push(pilaAux.pop());
         }
         frPaciente.close();
         brPaciente.close();
@@ -63,18 +71,24 @@ public class OpArchivo {
         archivo.createNewFile();
         FileWriter fwExpediente = new FileWriter(pathPacientes, true);
         PrintWriter pwExpediente = new PrintWriter(fwExpediente);
-        for (Paciente p : OpPaciente.pilaPacientes) {
-            pwExpediente.println(p.getExpediente());
-            pwExpediente.println(p.getNombre());
-            pwExpediente.println(p.getApPaterno());
-            pwExpediente.println(p.getApMaterno());
-            pwExpediente.println(p.getEdad());
-            pwExpediente.println(p.getEstatura());
-            pwExpediente.println(p.getPeso());
-            pwExpediente.println(p.getSexo());
-            pwExpediente.println(p.isEliminado());
+        Stack<Paciente> pilaAux = new Stack<>();
+        while(!OpPaciente.pilaPacientes.empty()){
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getExpediente());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getNombre());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getApPaterno());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getApMaterno());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getEdad());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getEstatura());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getPeso());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().getSexo());
+            pwExpediente.println(OpPaciente.pilaPacientes.peek().isEliminado());
+            //Agregamos los datos a la pilaAux
+            pilaAux.push(OpPaciente.pilaPacientes.pop());
         }
-        
+        //Devolvemos los valores de la pilaAux a pilaPacientes
+        while (!pilaAux.empty()) {
+            OpPaciente.pilaPacientes.push(pilaAux.pop());
+        }
         pwExpediente.close();
         fwExpediente.close();
            

@@ -33,7 +33,7 @@ public class E20EstadisticaObj {
                     break;
                 case 4: opPaciente.modificarPaciente();
                     break;
-                case 5: opPaciente.bajaTemporal();
+                case 5: //opPaciente.bajaTemporal();
                     break;
                 case 6: opPaciente.restaurarExpediente();
                     break;
