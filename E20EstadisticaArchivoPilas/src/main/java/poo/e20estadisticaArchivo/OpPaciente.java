@@ -53,7 +53,7 @@ public class OpPaciente {
         }
     }
 
-    //Consuta general de los expedientes
+    //Consutar general de los expediente
     public void consultarPaciente() {
         StringBuilder mensaje = new StringBuilder();
         mensaje.append("Exp.       N O M B R E        EDAD   ESTATURA   PESO   SEXO\n");
@@ -63,7 +63,7 @@ public class OpPaciente {
         //Se repite mientras la pilaPacientes no esté vacía
         while (!pilaPacientes.empty()) {
             //Quitamos el elmento de la cima y lo agregamos a la pila auxiliar
-            pilaAux.push(pilaPacientes.pop());
+            pilaAux.push(pilaPacientes.pop() );
             //Si elemento de la cima de la pila auxiliar no está eliminado
             //agregamos los datos al la variable mensaje
             if (!pilaAux.peek().isEliminado()) {
