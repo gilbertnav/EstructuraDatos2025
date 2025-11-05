@@ -2,9 +2,11 @@
 package estructuradatos.archivosjson;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IArchivo<T> {
-    void guardar(List<T> datos, String rutaArchivo) throws IOException;
-    List<T> readFromJson(String rutaArchivo) throws IOException;
+    void guardar(ArrayList<T> datos, String rutaArchivo) throws IOException;
+    ArrayList<T> leer(String rutaArchivo, Class<T> tipo) throws IOException;
 }

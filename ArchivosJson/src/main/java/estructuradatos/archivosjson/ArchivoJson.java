@@ -14,7 +14,7 @@ public class ArchivoJson<T> implements IArchivo<T> {
 
     
      @Override
-    public void guardar(List<T> datos, String rutaArchivo) throws IOException {
+    public void guardar(ArrayList<T> datos, String rutaArchivo) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(rutaArchivo)) {
             gson.toJson(datos, writer);
@@ -23,13 +23,13 @@ public class ArchivoJson<T> implements IArchivo<T> {
     }
 
     @Override
-    public List<T> readFromJson(String rutaArchivo) throws IOException {
-        List<T> pacientes=null;
-        try (FileReader reader = new FileReader("datos.json")) {
+    public ArrayList<T> leer(String rutaArchivo, Class<T> tipo) throws IOException {
+        ArrayList<T> pacientes=null;
+        try (FileReader reader = new FileReader(rutaArchivo)) {
             // 3. Crear una instancia de Gson
             Gson gson = new Gson();
             // Si el JSON es una lista de objetos Persona
-            Type listOfPersonType = new TypeToken<List<T>>() {}.getType();
+            Type listOfPersonType = new TypeToken<ArrayList<tipo>>() {}.getType();
             pacientes = gson.fromJson(reader, listOfPersonType);
 
         } catch (IOException e) {
