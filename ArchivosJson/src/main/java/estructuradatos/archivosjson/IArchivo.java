@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface IArchivo<T> {
     void guardar(ArrayList<T> datos, String rutaArchivo) throws IOException;
-    ArrayList<T> leer(String rutaArchivo, Class<T> tipo) throws IOException;
+    ArrayList<T> leer(String rutaArchivo) throws IOException;
 }
